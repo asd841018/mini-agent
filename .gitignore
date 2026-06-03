@@ -10,3 +10,4 @@ wheels/
 .venv
 .omx
 .env
+.omc

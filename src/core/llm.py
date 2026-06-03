@@ -8,18 +8,17 @@ load_dotenv()
 
 def run_once(
     prompt: str,
-    model: str = "gpt-5-nano"
+    model: str = "gpt-5-mini"
 ):
     client = OpenAI(
     # This is the default and can be omitted
     api_key=os.environ.get("OPENAI_API_KEY"),
     )
     messages =  [
-        {"role": "system", "content": "You are a helpful assistant."},
+        {"role": "system", "content": "You are a helpful coding assistant."},
         {"role": "user", "content": prompt},
     ]
     while True:
-        print(messages)
         response = client.chat.completions.create(
             model=model,
             messages=messages,
@@ -43,6 +42,7 @@ def run_once(
             # tool_response = func(**args)
             try:
                 result = TOOLS[name].invoke(args)
+                print(f"Tool call: {name} with args {args} returned {result}")
             except Exception as e:
                 result = f"Error: {e}"
             # Invalid parameter: messages with role 'tool' must be a response to a preceeding message with 'tool_calls'
@@ -54,5 +54,5 @@ def run_once(
     return response
 
 if __name__ == "__main__":
-    prompt = "What is the weather in New York? Also, what is 5 + 7?"
+    prompt = "幫我看一下上一個資料夾裡面的operating-agent資料夾裡面的 README.md 裡面有什麼內容？"
     response = run_once(prompt)
