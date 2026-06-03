@@ -5,14 +5,22 @@ description = "Tiny OpenAI text chat loop with XML tool calls."
 readme = "README.md"
 requires-python = ">=3.11"
 dependencies = [
-    "deepagents>=0.5.7",
-    "google-search-results>=2.4.2",
-    "langchain-openai>=1.0.3",
+    "docling>=2",
     "openai>=2.0.0",
     "python-dotenv>=1.2.2",
-    "typer>=0.25.1",
-    "yfinance>=1.2.2",
-]
+    "typer<0.22",
+  ]
 
 [tool.uv]
 package = false
+
+[tool.uv.sources]
+torch = { index = "pytorch-cu128" }
+torchvision = { index = "pytorch-cu128" }
+torchaudio = { index = "pytorch-cu128" }
+
+[[tool.uv.index]]
+name = "pytorch-cu128"
+url = "https://download.pytorch.org/whl/cu128"
+explicit = true
+
